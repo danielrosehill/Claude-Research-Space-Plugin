@@ -1,0 +1,12 @@
+{
+  "name": "research-space",
+  "version": "1.0.0",
+  "description": "Claude Code plugin: research workflow — source logging, source summarization, and deep-dive primitives, with deep-research/technical/osint/georeaction/stack/ecosystem/competitor variants.",
+  "author": {
+    "name": "Daniel Rosehill",
+    "url": "https://github.com/danielrosehill"
+  },
+  "repository": "https://github.com/danielrosehill/Claude-Research-Space-Plugin",
+  "license": "MIT",
+  "keywords": ["research", "osint", "ecosystem", "competitor", "deep-research", "tech-radar", "investigation"]
+}
