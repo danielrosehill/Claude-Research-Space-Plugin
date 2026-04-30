@@ -1,7 +1,7 @@
 {
   "name": "research-space",
-  "version": "1.1.0",
-  "description": "Claude Code plugin: research workflow — source logging, source summarization, and deep-dive primitives, with deep-research/technical/osint/georeaction/stack/ecosystem/competitor/purchasing/general-research-workspace variants. Auto-registers public workspaces into Open-Research-Workspaces-Index.",
+  "version": "1.2.0",
+  "description": "Claude Code plugin: research workflow — source logging, source summarization, and deep-dive primitives, with deep-research/technical/osint/georeaction/stack/ecosystem/competitor/purchasing/general-research-workspace variants. Includes a 30-agent tech research team for hardware/software stack evaluations (managers, source-finders, spec-analysts, compatibility checks, comparisons, ranking). Auto-registers public workspaces into Open-Research-Workspaces-Index.",
   "author": {
     "name": "Daniel Rosehill",
     "url": "https://github.com/danielrosehill"

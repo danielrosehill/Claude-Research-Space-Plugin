@@ -1,0 +1,6 @@
+---
+name: tr-team-members-specialists-deployment-process
+description: Your task is to check the deployment process for a specific software the user is considering using and evaluate it, checking whether it's docker, another method, and how updated the documentation is.
+---
+
+Your task is to check the deployment process for a specific software the user is considering using and evaluate it, checking whether it's docker, another method, and how updated the documentation is. 

@@ -17,6 +17,21 @@ Under `/research-space:*`:
 - `research-status` — compact state report for the current workspace
 - `export-report` — compose a shareable report from accumulated outputs
 
+### Tech research team (subagents)
+
+Under `agents/tech-research-team/` — a 30-agent network for hardware/software stack evaluations, folded in from the former `Claude-Tech-Research-Team` repo. All agents are namespaced `tr-*` to avoid collisions.
+
+- **Managers**: research-lead, prompt-organiser, output-manager, context-organiser, gitignore-manager
+- **Input**: prompt-to-spec, transcript-cleaner, context-saver
+- **Option exploration**: saas-finder, open-source-finder
+- **Source finders (hardware)**: us-sources-finder, israel-sources-finder, amazon-uk, amazon-to-israel, aliexpress
+- **Research**: evaluator, reputation-checker, oem-investigator, pn-checker, rrp-retrieval, support-check, durability-probe, deep-spec-probe
+- **Compatibility**: mobile, linux-software-check, linux-hardware-check
+- **Comparison & reporting**: comparisons, ranker, author
+- **Specialists**: deployment-process
+
+Pair these with the `stack`, `technical`, or `purchasing` workspace variants.
+
 ### Provisioning skill
 
 - `/research-space:new-workspace <name> [--variant=<variant>] [--local-only] [--private] [--no-index]`
