@@ -1,6 +1,6 @@
 ---
 name: new-workspace
-description: Provision a new research-space workspace on disk. Use when the user wants to start a new research project (deep-research, technical, osint, georeaction, stack, ecosystem, competitor, purchasing, or general-research-workspace). Accepts a workspace name and optional variant. Scaffolds the workspace, personalises CLAUDE.md from the user's global memory, creates a GitHub repo (public by default), and auto-registers public workspaces into the Open-Research-Workspaces-Index.
+description: Provision a new research-space workspace on disk. Use when the user wants to start a new research project (deep-research, technical, osint, georeaction, stack, ecosystem, competitor, purchasing, general-research-workspace, or obsidian-vault). Accepts a workspace name and optional variant. Scaffolds the workspace, personalises CLAUDE.md from the user's global memory, creates a GitHub repo (public by default), and auto-registers public workspaces into the Open-Research-Workspaces-Index.
 disable-model-invocation: true
 allowed-tools: Bash(mkdir *), Bash(cp *), Bash(cat *), Bash(git init *), Bash(git add *), Bash(git commit *), Bash(gh repo create *), Bash(gh auth status), Bash(git push *), Bash(gh repo clone *), Bash(git clone *), Bash(git -C *), Bash(rm -rf /tmp/*), Read, Edit
 ---
@@ -25,6 +25,7 @@ Creates a new workspace for open-ended research. This plugin's primitives (`/res
   - `competitor` — competitor intelligence
   - `purchasing` — spec → candidates → shortlist → decision for a purchase
   - `general-research-workspace` — openly-logged Q&A research space (user asks, Claude writes longform responses, pairs consolidated into PDFs)
+  - `obsidian-vault` — the standard research loop scaffolded as a working Obsidian vault (committed `.obsidian/` config, frontmatter schema, wikilinks, note templates, canvas). Pick this when the user says "Obsidian", "vault", "PKM", or wants to browse the research by graph and backlinks rather than by folder
 - **`--local-only`** (optional): skip GitHub repo creation and push. Default: create a GitHub repo and push.
 - **`--private`** (optional): create the GitHub repo as private. Default: public. Private workspaces are **not** auto-registered into the public index.
 - **`--no-index`** (optional): even for a public workspace, skip the auto-registration into `Open-Research-Workspaces-Index`.
@@ -38,13 +39,14 @@ Creates a new workspace for open-ended research. This plugin's primitives (`/res
 /research-space:new-workspace LLM-Ecosystem-2026 --variant=ecosystem
 /research-space:new-workspace Framework-Laptop-Purchase --variant=purchasing --private
 /research-space:new-workspace State-Of-Claude-Context-0426 --variant=general-research-workspace
+/research-space:new-workspace Agent-Memory-Landscape --variant=obsidian-vault
 ```
 
 ## Procedure
 
 ### 1. Parse arguments
 
-Extract workspace name, target parent path, variant, and flags from `$ARGUMENTS`. If workspace name is missing, ask the user before proceeding. If variant is not one of the supported nine, list the supported ones and stop.
+Extract workspace name, target parent path, variant, and flags from `$ARGUMENTS`. If workspace name is missing, ask the user before proceeding. If variant is not one of the supported ten, list the supported ones and stop.
 
 ### 2. Resolve the scaffold path
 
@@ -62,6 +64,12 @@ cp -r ${CLAUDE_SKILL_DIR}/../../template/<variant>/. <target-parent>/<workspace-
 ```
 
 Do **not** copy any `.claude/` tree. The plugin's primitives are global.
+
+The trailing `/.` matters: it carries dotfiles. For `obsidian-vault` that is the whole point — without `.obsidian/` and `.gitignore` the result is a folder of markdown, not a vault. After copying that variant, verify:
+
+```bash
+test -f <workspace>/.obsidian/app.json && test -f <workspace>/.gitignore || echo "dotfiles missing — re-copy with the trailing /."
+```
 
 ### 5. Personalise CLAUDE.md
 
@@ -83,8 +91,30 @@ Ask only for facts the plugin can't infer:
 - **competitor**: the competitor company name and your own company for framing.
 - **purchasing**: the purchase target (what's being bought) → `<PURCHASE_TARGET>`. Offer to seed `context/spec.md` with a short intake.
 - **general-research-workspace**: the research question or theme → `<RESEARCH_QUESTION>`. This is the umbrella question; individual questions accrue under `questions/`.
+- **obsidian-vault**: the central question → `<RESEARCH_QUESTION>`, plus the topic slug for the `#research/<topic>` tag.
 
 Write these into `CLAUDE.md` or `context/scope.md` as appropriate.
+
+### 6a. `obsidian-vault` only — substitute placeholders and seed the tag
+
+This variant carries placeholders in more files than the others, because the vault's own notes are part of the scaffold. Replace across every `.md` and the `.canvas`:
+
+| Placeholder | Replace with |
+|-------------|--------------|
+| `<WORKSPACE_NAME>` | the workspace name |
+| `<RESEARCH_QUESTION>` | the central question |
+| `<DATE>` | today's date, ISO (`YYYY-MM-DD`) |
+
+```bash
+cd <workspace>
+grep -rl '<WORKSPACE_NAME>\|<RESEARCH_QUESTION>\|<DATE>' . --include='*.md' --include='*.canvas'
+```
+
+Substitute in each, then confirm none remain. `Research Map.canvas` is JSON — edit the string values only, and re-validate with `python3 -m json.tool` afterwards.
+
+Then set the topic tag: replace the empty `research/` tag in `Meta/Tags.md`, `Home.md`, `Context/Scope.md` and the six files in `Templates/` with `research/<topic>`, so notes created from the templates carry it from the start.
+
+Leave the `{{date}}` tokens in `Templates/` alone — those are Obsidian's own Templates-plugin syntax, filled at note-creation time, not now.
 
 ### 7. Initialise git and (optionally) publish
 
@@ -146,6 +176,7 @@ Tell the user:
 - When they have a handful of sources: `/research-space:summarize-sources`.
 - For focused investigation: `/research-space:deep-dive <topic>`.
 - For `general-research-workspace`: note the Q&A pair convention (`questions/<slug>.md` + `answers/<slug>.md`) and that `/research-space:export-report` consolidates selected pairs into a single doc.
+- For `obsidian-vault`: tell them to open the folder in Obsidian (`Open folder as vault`) — `.obsidian/` is committed, so it opens configured — and to start at `Home.md` or `Research Map.canvas`. Point them at `Meta/Conventions.md` for the frontmatter schema. Mention that no community plugins are needed, and that `Meta/Dataview Queries.md` becomes live if they have Dataview.
 - Reminder that the workspace is **data** — they can delete/move it freely without losing plugin commands.
 
 ## Notes

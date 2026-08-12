@@ -1,0 +1,15 @@
+{
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "Assets",
+  "newFileFolderPath": "Notes",
+  "newFileLocation": "folder",
+  "newLinkFormat": "shortest",
+  "promptDelete": false,
+  "showInlineTitle": true,
+  "showUnsupportedFiles": true,
+  "strictLineBreaks": false,
+  "trashOption": "local",
+  "useMarkdownLinks": false,
+  "useTab": false,
+  "tabSize": 2
+}

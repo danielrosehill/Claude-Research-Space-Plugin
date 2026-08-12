@@ -1,0 +1,150 @@
+{
+	"nodes": [
+		{
+			"id": "central-question",
+			"type": "text",
+			"text": "# <WORKSPACE_NAME>\n\n**Central question**\n\n<RESEARCH_QUESTION>",
+			"x": -220,
+			"y": -560,
+			"width": 640,
+			"height": 200,
+			"color": "6"
+		},
+		{
+			"id": "how-to-read",
+			"type": "text",
+			"text": "**How to read this canvas**\n\nLeft to right, top to bottom, is the research loop:\n\nquestions → sources → findings → outputs\n\nDrag notes onto the canvas as the work grows. This is a working surface, not a diagram to keep tidy.",
+			"x": 640,
+			"y": -560,
+			"width": 380,
+			"height": 260
+		},
+		{
+			"id": "context",
+			"type": "file",
+			"file": "Context/Context.md",
+			"x": -940,
+			"y": -180,
+			"width": 340,
+			"height": 260,
+			"color": "5"
+		},
+		{
+			"id": "questions",
+			"type": "file",
+			"file": "Questions/Questions.md",
+			"x": -220,
+			"y": -200,
+			"width": 340,
+			"height": 260,
+			"color": "3"
+		},
+		{
+			"id": "sources",
+			"type": "file",
+			"file": "Sources/Sources.md",
+			"x": -760,
+			"y": 260,
+			"width": 340,
+			"height": 260,
+			"color": "5"
+		},
+		{
+			"id": "findings",
+			"type": "file",
+			"file": "Findings/Findings.md",
+			"x": -220,
+			"y": 260,
+			"width": 340,
+			"height": 260,
+			"color": "4"
+		},
+		{
+			"id": "entities",
+			"type": "file",
+			"file": "Entities/Entities.md",
+			"x": 320,
+			"y": 260,
+			"width": 340,
+			"height": 260,
+			"color": "6"
+		},
+		{
+			"id": "outputs",
+			"type": "file",
+			"file": "Outputs/Outputs.md",
+			"x": -220,
+			"y": 720,
+			"width": 340,
+			"height": 260,
+			"color": "1"
+		},
+		{
+			"id": "conventions",
+			"type": "file",
+			"file": "Meta/Conventions.md",
+			"x": 640,
+			"y": 720,
+			"width": 380,
+			"height": 260
+		},
+		{
+			"id": "notes",
+			"type": "file",
+			"file": "Notes/Notes.md",
+			"x": -940,
+			"y": 720,
+			"width": 340,
+			"height": 260
+		}
+	],
+	"edges": [
+		{
+			"id": "e-question-questions",
+			"fromNode": "central-question",
+			"fromSide": "bottom",
+			"toNode": "questions",
+			"toSide": "top"
+		},
+		{
+			"id": "e-context-questions",
+			"fromNode": "context",
+			"fromSide": "right",
+			"toNode": "questions",
+			"toSide": "left",
+			"label": "frames"
+		},
+		{
+			"id": "e-questions-findings",
+			"fromNode": "questions",
+			"fromSide": "bottom",
+			"toNode": "findings",
+			"toSide": "top",
+			"label": "answered by"
+		},
+		{
+			"id": "e-sources-findings",
+			"fromNode": "sources",
+			"fromSide": "right",
+			"toNode": "findings",
+			"toSide": "left",
+			"label": "cited by"
+		},
+		{
+			"id": "e-entities-findings",
+			"fromNode": "entities",
+			"fromSide": "left",
+			"toNode": "findings",
+			"toSide": "right",
+			"label": "about"
+		},
+		{
+			"id": "e-findings-outputs",
+			"fromNode": "findings",
+			"fromSide": "bottom",
+			"toNode": "outputs",
+			"toSide": "top",
+			"label": "assembled into"
+		}
+	]
+}

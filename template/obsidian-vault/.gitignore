@@ -1,0 +1,15 @@
+# Per-machine Obsidian UI state — would conflict on every pull.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+
+# Obsidian local trash
+.trash/
+
+# Rendered deliverables — regenerate from Outputs/ rather than committing binaries.
+# Delete these two lines if you want the PDFs versioned.
+Outputs/**/*.pdf
+Outputs/**/*.mp3
+
+.DS_Store

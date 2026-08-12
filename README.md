@@ -1,6 +1,6 @@
 # Claude-Research-Space-Plugin
 
-Claude Code plugin: research workflow — source logging, source summarization, and deep-dive primitives, with nine variants for different research modes. Public workspaces are auto-registered into the [Open-Research-Workspaces-Index](https://github.com/danielrosehill/Open-Research-Workspaces-Index).
+Claude Code plugin: research workflow — source logging, source summarization, and deep-dive primitives, with ten variants for different research modes — including an Obsidian-vault variant that doubles as a working vault. Public workspaces are auto-registered into the [Open-Research-Workspaces-Index](https://github.com/danielrosehill/Open-Research-Workspaces-Index).
 
 Part of the [danielrosehill Claude Code marketplace](https://github.com/danielrosehill/Claude-Code-Plugins).
 
@@ -51,6 +51,17 @@ Scaffolds a new research workspace (CLAUDE.md + variant-specific layout), person
 | `competitor` | Competitor intelligence — product, pricing, team, positioning |
 | `purchasing` | Structured purchase research — spec → candidates → shortlist → decision |
 | `general-research-workspace` | Openly-logged Q&A research space — user asks, Claude writes longform answers, pairs periodically consolidated into PDFs |
+| `obsidian-vault` | The same research loop, scaffolded as a working [Obsidian](https://obsidian.md) vault — committed `.obsidian/` config, frontmatter schema, wikilink discipline, templates, canvas |
+
+### The `obsidian-vault` variant
+
+Optimised for two readers rather than one. It is the standard research scaffold — context, questions, sources, findings, outputs — expressed so that opening the folder in Obsidian gives a configured vault rather than a pile of markdown: graph colour groups per folder, backlinks that resolve, a properties schema the Properties panel understands, note templates wired to the core Templates plugin, and a canvas of the research loop.
+
+No community plugins are required: each folder carries a hand-maintained map of content, so the vault works on a fresh install. `Meta/Dataview Queries.md` mirrors those views as live queries for anyone who has Dataview.
+
+The scaffold's `CLAUDE.md` teaches the agent the vault conventions it would not otherwise follow — quoted link values in frontmatter, one claim per note, never linking a note that does not exist, and rewriting backlinks by hand when renaming from the shell (Obsidian only does that for renames it performs itself).
+
+Also published standalone as [Obsidian-Research-Vault-Template](https://github.com/danielrosehill/Obsidian-Research-Vault-Template), a GitHub template repo, for use without the plugin. `template/obsidian-vault/` here is the source of truth; the standalone repo mirrors it.
 
 ## Pattern
 
