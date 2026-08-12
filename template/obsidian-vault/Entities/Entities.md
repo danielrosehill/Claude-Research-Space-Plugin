@@ -17,7 +17,7 @@ Add every new note to the list below — this map is maintained by hand so the v
 
 ## Notes
 
-<!-- - [[Note title]] — one line on what it says -->
+<!-- One line per note: a wikilink to it, then what it says. -->
 
 _None yet._
 

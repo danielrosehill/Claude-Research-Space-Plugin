@@ -25,7 +25,7 @@ tags:
 
 ## Claims worth extracting
 
-<!-- Each of these should become its own note in Findings/, with sources: ["[[this note]]"]. -->
+<!-- Each of these becomes its own note in Findings/, with this note in its sources property. -->
 
 - 
 

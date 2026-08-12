@@ -87,6 +87,14 @@ sources: [[[240812-acme-filing]]]        # ❌ invalid YAML
 sources: [[240812-acme-filing]]          # ❌ parses as a nested list, no link
 ```
 
+## Two placeholder syntaxes, and why `Templates/` is excluded
+
+Notes in `Templates/` carry `{{date}}` — Obsidian's own Templates-plugin token, filled when a note is created from the template. It is deliberately unquoted, so the note you end up with has a real date that Dataview and Bases treat as a date rather than a string.
+
+The cost is that the template file *itself* has frontmatter that is not valid YAML (`{{date}}` parses as a mapping key). `.obsidian/app.json` therefore sets `userIgnoreFilters: ["Templates/"]`, which keeps the folder out of search, the graph, backlinks and the quick switcher — so half-formed template frontmatter never pollutes a query and template boilerplate never turns up in a research search. Insert templates through the Templates plugin's own command, not the quick switcher.
+
+Anything substituting into this vault must leave `{{date}}` alone and only fill the `<ANGLE_BRACKETED>` placeholders.
+
 ## Filenames
 
 | Folder | Pattern | Example |

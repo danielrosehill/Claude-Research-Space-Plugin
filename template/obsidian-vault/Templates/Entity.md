@@ -12,7 +12,7 @@ tags:
 # 
 
 <!-- entity-type: person | org | product | place | event -->
-<!-- Fill aliases so [[Acme]] and [[Acme Corporation]] resolve to this note. -->
+<!-- Fill aliases so short and long forms of the name both resolve to this note. -->
 
 ## What it is
 
@@ -30,4 +30,4 @@ tags:
 
 ## Sources
 
-- [[]]
+- 

@@ -75,6 +75,7 @@ Link values in frontmatter must be quoted to render as links: `sources: ["[[2408
 - **Link on first mention.** The first time a note mentions an entity, a source, or another finding, wikilink it. Backlinks are how the human navigates.
 - **Prefer links over tags for things; tags for status and topic.** `[[Acme Corp]]` is a thing. `#status/verified` is a state.
 - **Never fabricate a link target.** If `[[Some Entity]]` does not exist yet, either create the stub note or do not link it. Unresolved links pollute the graph.
+- **Never write an example wikilink in prose or in an HTML comment.** Obsidian indexes links inside `<!-- -->` exactly as it indexes them anywhere else, so an illustrative `[[Note title]]` becomes a real unresolved node in the graph. Put examples in backticks or write them out in words.
 
 ## Renaming and moving
 

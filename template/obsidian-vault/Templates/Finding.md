@@ -22,7 +22,7 @@ tags:
 
 <!-- Which source says what. Wikilink each one; they must also appear in the sources: property. -->
 
-- [[]] — 
+- 
 
 ## Counter-evidence
 

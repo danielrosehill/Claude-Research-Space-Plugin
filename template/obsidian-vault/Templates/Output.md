@@ -16,7 +16,7 @@ tags:
 <!--
 This note is going to leave the vault. Portability rules by format:
 
-  pdf    — no [[wikilinks]], no ![[embeds]], no callouts. Resolve them during export
+  pdf    — no wikilinks, no embeds, no callouts. Resolve them during export
            or write plain markdown here from the start. Typst is the house renderer.
   audio  — no tables, no bare URLs, abbreviations expanded, numbers written to be read.
   markdown / slides — wikilinks are fine if the destination understands them.

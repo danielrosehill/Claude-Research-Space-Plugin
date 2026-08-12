@@ -11,5 +11,8 @@
   "trashOption": "local",
   "useMarkdownLinks": false,
   "useTab": false,
-  "tabSize": 2
+  "tabSize": 2,
+  "userIgnoreFilters": [
+    "Templates/"
+  ]
 }

@@ -82,11 +82,37 @@ Cost is real: the agent must remember to update the MOCs. `CLAUDE.md` carries th
 
 Graph-view `colorGroups` uses a different colour encoding again — `{"a": 1, "rgb": <int>}`, where the int is `r<<16 | g<<8 | b`. Two colour formats in one config tree; do not copy one into the other.
 
+## HTML comments do not hide wikilinks
+
+**Confirmed** by building the scaffold and scanning it: Obsidian indexes `[[links]]` inside `<!-- HTML comments -->` exactly as it does anywhere else. An illustrative `<!-- - [[Note title]] — one line on what it says -->` in a map-of-content note becomes a real unresolved node in the graph, and seven such comments produce seven ghost nodes on first open.
+
+The first cut of this scaffold shipped exactly that mistake, and its own `CLAUDE.md` forbade it. Examples must go in backticks (code spans are not indexed) or be written out in words. Worth a scan before shipping any vault:
+
+```bash
+# unresolved link targets, ignoring fenced blocks and code spans
+python3 - <<'EOF'
+import pathlib, re
+md=[p for p in pathlib.Path('.').rglob('*.md') if '.git' not in p.parts]
+stems={p.stem for p in md}
+for p in md:
+    t=re.sub(r'`[^`\n]*`','',re.sub(r'```.*?```','',p.read_text(),flags=re.S))
+    for m in re.finditer(r'!?\[\[([^\]|#]+)',t):
+        if m.group(1).strip() not in stems: print(p, '->', m.group(1))
+EOF
+```
+
 ## Templates: two templating systems in one folder
 
 `Templates/*.md` are consumed by **both** Obsidian's core Templates plugin and the agent. They contain `{{date}}` tokens, which are Obsidian's syntax, filled at note-creation time.
 
 The provisioning skill substitutes `<WORKSPACE_NAME>`, `<RESEARCH_QUESTION>` and `<DATE>` across the scaffold — and must **not** touch `{{date}}`. Two placeholder syntaxes coexisting in one tree is a trap; the skill's step 6a says so explicitly for exactly that reason.
+
+`{{date}}` is left **unquoted** in template frontmatter, which is a deliberate trade:
+
+- Unquoted → the created note gets `created: 2026-08-12`, which Dataview and Bases treat as a date, so `WHERE updated >= date(today) - dur(7 days)` works. But the template file itself has frontmatter that is not valid YAML — `{{date}}` parses as a mapping key and PyYAML rejects it with *"found unhashable key"*.
+- Quoted (`"{{date}}"`) → the template file parses cleanly, but every created note carries `created: "2026-08-12"` as a **string**, and every date comparison in `Meta/Dataview Queries.md` silently stops matching.
+
+Silent query failure is worse than a warning on six files nobody opens, so: unquoted, and `.obsidian/app.json` sets `userIgnoreFilters: ["Templates/"]` to keep the folder out of search, graph, backlinks and the quick switcher entirely. Templates are inserted through the Templates plugin's own command, which does not honour that filter.
 
 ## Copying the scaffold
 

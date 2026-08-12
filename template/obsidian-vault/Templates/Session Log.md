@@ -15,7 +15,7 @@ tags:
 
 <!-- Link the notes created or changed. This note is a pointer, not a duplicate. -->
 
-- [[]]
+- 
 
 ## Dead ends
 
@@ -23,4 +23,4 @@ tags:
 
 ## Open at the end of the session
 
-- [[]]
+- 
