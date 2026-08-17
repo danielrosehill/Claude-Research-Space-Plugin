@@ -14,7 +14,7 @@ Creates a new workspace for open-ended research. This plugin's primitives (`/res
 `$ARGUMENTS` is parsed as:
 
 - **First positional**: workspace name (Train-Case preferred, kebab-case accepted). Required.
-- **Second positional** (optional): target parent path. Defaults to `~/repos/github/my-repos`.
+- **Second positional** (optional): target parent path. Defaults to the topic group under `~/repos/github/` that most specifically fits the subject — see `~/repos/github/README.md` for the group list. (`~/repos/github/my-repos/` is no longer the default; it holds only blog repos now.)
 - **`--variant=<variant>`** (optional): which scaffold to copy. Default: `deep-research`. Supported:
   - `deep-research` — general-purpose investigation around one central question
   - `technical` — version-sensitive technical research (APIs, libraries, protocols, hardware)
