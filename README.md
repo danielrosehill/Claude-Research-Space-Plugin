@@ -79,3 +79,7 @@ See [PLAN.md in Claude-Workspace-Reshaping-190426](https://github.com/danielrose
 ## License
 
 MIT.
+
+## Folded in
+
+- `tech-research`, retired 2026-11-05. 26 commands were already identical in `agents/tech-research-team/`; the 7 unique and 4 near-identical ones are archived in `earlier/tech-research-plugin/` and are not loaded.
