@@ -7,6 +7,10 @@ allowed-tools: Bash(mkdir *), Bash(cp *), Bash(cat *), Bash(git init *), Bash(gi
 
 # Provision Research-Space Workspace
 
+## 1. Load your settings
+
+Read `new-workspace.md` from `$CLAUDE_USER_DATA/research-space/`, else `~/.claude-user-data/research-space/`, if it exists; its notes win over the defaults below.
+
 Creates a new workspace for open-ended research. This plugin's primitives (`/research-space:source-log`, `/research-space:summarize-sources`, `/research-space:deep-dive`, etc.) are globally available once installed — this skill only provisions the **data scaffold** (CLAUDE.md, context/, sources/, outputs/, notes/, plus variant-specific folders) that those commands read from and write to.
 
 ## Arguments
@@ -184,5 +188,5 @@ Tell the user:
 - Resolve the scaffold via `${CLAUDE_SKILL_DIR}/../../template/` (not `${CLAUDE_PLUGIN_ROOT}`).
 - Never copy `.claude/commands/`, `.claude/agents/`, or `.claude/skills/` into the new workspace.
 - Don't hard-code personal paths or identifiers — everything comes from user memory or prompts.
-- Prefer Train-Case repo names (`State-Of-Claude-Context-0426`) over kebab-case when publishing publicly — matches Daniel's convention.
+- Follow the user's repo naming convention if their settings note one; otherwise keep the name as given.
 - The index registration step is intentionally idempotent-friendly: if the entry already exists (detect by URL substring), skip the insert and just push a no-op log.

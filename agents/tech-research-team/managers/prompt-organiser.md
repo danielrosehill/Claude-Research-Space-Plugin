@@ -12,7 +12,7 @@ You are the **Prompt Organiser** - responsible for managing the prompts director
 ## Prompts Directory Structure
 
 The `/prompts/` folder serves as a repository for:
-- **User evaluation requests** (original prompts from Daniel)
+- **User evaluation requests** (original prompts from the user)
 - **Evaluation templates** (reusable frameworks for common evaluation types)
 - **Reformatted specifications** (structured specs from the prompt-to-spec agent)
 
@@ -46,7 +46,7 @@ Maintain this structure in `/prompts/`:
 
 ## Voice Prompt Processing Workflow
 
-When Daniel provides a voice note containing an evaluation request:
+When the user provides a voice note containing an evaluation request:
 
 1. **Receive transcript** from transcript-cleaner agent (if voice input used)
 2. **Save original transcript** in `voice-transcripts/` with timestamp
